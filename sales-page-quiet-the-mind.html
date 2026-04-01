@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiet the Mind — with love, nabila</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:   #fefae0;
+    --sand:    #f5edd6;
+    --gold:    #d4a373;
+    --gold-dk: #b8865a;
+    --sage:    #ccd5ae;
+    --sage-dk: #a3b18a;
+    --brown:   #7c5c3e;
+    --dark:    #1e140c;
+    --muted:   #9a7f68;
+    --white:   #ffffff;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(28px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(212,163,115,0.4); }
+    70%  { box-shadow: 0 0 0 16px rgba(212,163,115,0); }
+    100% { box-shadow: 0 0 0 0 rgba(212,163,115,0); }
+  }
+
+  .fade-up { animation: fadeUp 0.9s ease both; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.30s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.60s; }
+  .delay-5 { animation-delay: 0.75s; }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero {
+    min-height: 100svh;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 28px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* decorative rings */
+  .hero-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(212,163,115,0.12);
+    pointer-events: none;
+  }
+  .ring-1 { width:500px; height:500px; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .ring-2 { width:720px; height:720px; top:50%; left:50%; transform:translate(-50%,-50%); }
+  .ring-3 { width:960px; height:960px; top:50%; left:50%; transform:translate(-50%,-50%); }
+
+  .hero-brand {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .hero-arabic {
+    font-size: clamp(28px, 5vw, 42px);
+    color: rgba(212,163,115,0.5);
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: 4px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 96px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(18px, 3vw, 26px);
+    color: rgba(254,250,224,0.55);
+    margin-bottom: 40px;
+    max-width: 540px;
+    line-height: 1.5;
+  }
+
+  .hero-price-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(212,163,115,0.1);
+    border: 1px solid rgba(212,163,115,0.3);
+    border-radius: 100px;
+    padding: 10px 24px;
+    margin-bottom: 32px;
+    animation: pulse-ring 2.5s infinite;
+  }
+  .hero-price-tag .was {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .hero-price-tag .now {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .hero-price-tag .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 48px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    animation: float 3.5s ease-in-out infinite;
+  }
+  .btn-primary:hover {
+    background: var(--gold-dk);
+    transform: translateY(-3px) scale(1.02);
+    animation: none;
+  }
+
+  .hero-trust {
+    margin-top: 28px;
+    font-size: 12px;
+    color: rgba(254,250,224,0.3);
+    letter-spacing: 1px;
+  }
+
+  /* ══════════════════════════════
+     PAIN SECTION
+  ══════════════════════════════ */
+  .pain {
+    background: var(--sand);
+    padding: 90px 28px;
+  }
+  .pain-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .section-tag {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .pain h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 36px;
+  }
+  .pain h2 em { font-style: italic; color: var(--gold-dk); }
+
+  .pain-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .pain-list li {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 14px;
+    align-items: start;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--brown);
+  }
+  .pain-list li::before {
+    content: '→';
+    color: var(--gold);
+    margin-top: 1px;
+    font-size: 14px;
+  }
+
+  .pain-closing {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--dark);
+    line-height: 1.6;
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  /* ══════════════════════════════
+     BRIDGE / AYAH
+  ══════════════════════════════ */
+  .bridge {
+    background: var(--dark);
+    padding: 80px 28px;
+    text-align: center;
+  }
+  .bridge-arabic {
+    font-size: clamp(22px, 4vw, 36px);
+    color: var(--gold);
+    margin-bottom: 16px;
+    letter-spacing: 3px;
+  }
+  .bridge-ayah {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(20px, 3.5vw, 30px);
+    color: var(--cream);
+    max-width: 600px;
+    margin: 0 auto 12px;
+    line-height: 1.6;
+  }
+  .bridge-ref {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .bridge-p {
+    max-width: 560px;
+    margin: 36px auto 0;
+    font-size: 16px;
+    color: rgba(254,250,224,0.65);
+    line-height: 1.8;
+  }
+
+  /* ══════════════════════════════
+     WHAT'S INCLUDED
+  ══════════════════════════════ */
+  .includes {
+    padding: 90px 28px;
+    background: var(--cream);
+  }
+  .includes-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .includes-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .includes-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 5vw, 54px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-top: 12px;
+  }
+  .includes-header h2 strong {
+    font-weight: 600;
+    font-style: italic;
+    color: var(--gold-dk);
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(30,20,12,0.07);
+    margin-bottom: 24px;
+  }
+  .product-card-header {
+    padding: 32px 36px 28px;
+    border-bottom: 1px solid rgba(139,99,71,0.08);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .product-type {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .product-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  .product-card h3 em { font-style: italic; color: var(--brown); }
+  .product-value {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .product-value .v-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .product-value .v-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--gold-dk);
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .product-card-body {
+    padding: 28px 36px 32px;
+  }
+  .product-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--dark);
+    line-height: 1.5;
+  }
+  .feature-list li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage-dk);
+    flex-shrink: 0;
+  }
+
+  /* bundle total box */
+  .bundle-total {
+    background: var(--dark);
+    border-radius: 20px;
+    padding: 40px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .bundle-total-left h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--cream);
+    font-weight: 300;
+    margin-bottom: 6px;
+  }
+  .bundle-total-left p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 360px;
+  }
+  .bundle-total-right {
+    text-align: center;
+  }
+  .price-was {
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .price-now {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 300;
+  }
+  .price-note {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-top: 4px;
+  }
+
+  /* ══════════════════════════════
+     FOR YOU IF
+  ══════════════════════════════ */
+  .for-you {
+    background: var(--sage);
+    padding: 80px 28px;
+  }
+  .for-you-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .for-you h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 5vw, 48px);
+    font-weight: 400;
+    margin-bottom: 36px;
+    line-height: 1.2;
+  }
+  .check-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .check-list li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 14px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--dark);
+  }
+  .check-list li .check {
+    color: var(--brown);
+    font-size: 16px;
+    margin-top: 1px;
+  }
+  .for-you-closing {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--brown);
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════
+     ABOUT NABILA
+  ══════════════════════════════ */
+  .about {
+    padding: 90px 28px;
+    background: var(--cream);
+  }
+  .about-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .about-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .about h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .about h2 em { font-style: italic; }
+  .about p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--brown);
+    margin-bottom: 16px;
+  }
+  .about-sig {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold-dk);
+    margin-top: 8px;
+  }
+
+  /* ══════════════════════════════
+     FAQ
+  ══════════════════════════════ */
+  .faq {
+    background: var(--sand);
+    padding: 80px 28px;
+  }
+  .faq-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .faq h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(139,99,71,0.15);
+    padding: 20px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .faq-a {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ══════════════════════════════
+     CTA BOTTOM
+  ══════════════════════════════ */
+  .cta-bottom {
+    background: var(--dark);
+    padding: 100px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bottom::before {
+    content: 'بِسْمِ اللَّهِ';
+    position: absolute;
+    font-size: clamp(80px, 20vw, 180px);
+    color: rgba(212,163,115,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 8px;
+  }
+  .cta-bottom .section-tag { color: var(--sage); margin-bottom: 20px; }
+  .cta-bottom h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .cta-bottom h2 em { font-style: italic; color: var(--gold); }
+  .cta-bottom p {
+    font-size: 16px;
+    color: rgba(254,250,224,0.5);
+    margin-bottom: 40px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+  .cta-price-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 10vw, 100px);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, var(--gold), #f0c896, var(--gold));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+  .cta-note {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+  }
+  .btn-cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .btn-big {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 22px 64px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-big:hover {
+    background: var(--gold-dk);
+    transform: scale(1.03);
+  }
+  .btn-trust {
+    font-size: 12px;
+    color: rgba(254,250,224,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(212,163,115,0.08);
+    padding: 32px 28px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(254,250,224,0.2);
+    letter-spacing: 1px;
+  }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── STICKY BAR ── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(30,20,12,0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(212,163,115,0.2);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    z-index: 100;
+    flex-wrap: wrap;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+  .sticky-bar.visible { transform: translateY(0); }
+  .sticky-text {
+    font-size: 14px;
+    color: var(--cream);
+  }
+  .sticky-text strong { color: var(--gold); }
+  .btn-sticky {
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .btn-sticky:hover { background: var(--gold-dk); }
+
+  @media (max-width: 600px) {
+    .product-card-header { flex-direction: column; }
+    .product-value { text-align: left; }
+    .bundle-total { flex-direction: column; text-align: center; }
+    .bundle-total-left p { max-width: 100%; }
+    .sticky-bar { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-ring ring-1"></div>
+  <div class="hero-ring ring-2"></div>
+  <div class="hero-ring ring-3"></div>
+
+  <p class="hero-brand fade-up">with love, nabila</p>
+  <p class="hero-arabic fade-up delay-1">اطمئنان</p>
+  <p class="hero-eyebrow fade-up delay-1">A healing bundle for the Muslimah who can't stop the noise</p>
+
+  <h1 class="fade-up delay-2">Quiet<br><em>the Mind</em></h1>
+
+  <p class="hero-sub fade-up delay-3">
+    A journal + mini course to help you trade anxiety for tawakkul — one page, one ayah, one breath at a time.
+  </p>
+
+  <div class="hero-price-tag fade-up delay-4">
+    <span class="was">$38 value</span>
+    <span class="now">$17</span>
+    <span class="label">Instant download</span>
+  </div>
+
+  <a href="#get-it" class="btn-primary fade-up delay-5">Yes — I want peace &nbsp;→</a>
+  <p class="hero-trust fade-up delay-5">Instant access · PDF + email course · No subscription</p>
+</section>
+
+<!-- ══ PAIN ══ -->
+<section class="pain">
+  <div class="pain-inner">
+    <span class="section-tag">be honest with yourself</span>
+    <h2>Your mind hasn't been<br><em>quiet in a long time.</em></h2>
+
+    <ul class="pain-list">
+      <li>You make du'a and the anxiety still sits on your chest five minutes later</li>
+      <li>You know the ayahs about tawakkul but trusting Allah still feels impossible when the worry hits</li>
+      <li>You spiral at 2am replaying every "what if" your mind can create</li>
+      <li>You feel guilty for being anxious — like it means your imaan isn't strong enough</li>
+      <li>You've tried journaling but stare at blank pages not knowing where to begin</li>
+      <li>You're exhausted from carrying so much while appearing put-together to everyone else</li>
+    </ul>
+
+    <p class="pain-closing">
+      "Habibti — your anxiety doesn't mean your faith is weak. It means you're human. And there is guidance for this."
+    </p>
+  </div>
+</section>
+
+<!-- ══ BRIDGE / AYAH ══ -->
+<section class="bridge">
+  <p class="bridge-arabic">أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</p>
+  <p class="bridge-ayah">"Verily, in the remembrance of Allah do hearts find rest."</p>
+  <p class="bridge-ref">Surah Ar-Ra'd · 13:28</p>
+  <p class="bridge-p">
+    This bundle was built on that ayah. Not as a quote to screenshot — but as a practice. A structured, gentle, daily practice that brings you back to stillness through your own hand, your own words, and Allah's own promises to you.
+  </p>
+</section>
+
+<!-- ══ WHAT'S INCLUDED ══ -->
+<section class="includes" id="includes">
+  <div class="includes-inner">
+    <div class="includes-header">
+      <span class="section-tag">everything inside the bundle</span>
+      <h2>Two tools.<br><strong>One transformation.</strong></h2>
+    </div>
+
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="product-card-header">
+        <div>
+          <p class="product-type">Product 01 · Printable PDF Journal</p>
+          <h3>The <em>Quiet the Mind</em><br>Healing Journal</h3>
+        </div>
+        <div class="product-value">
+          <span class="v-label">Valued at</span>
+          <span class="v-price">$22</span>
+        </div>
+      </div>
+      <div class="product-card-body">
+        <p class="product-desc">
+          A 28-page guided journal built entirely around Islamic healing. Every section opens with an ayah, moves through a reflection, and closes with a du'a prompt. Designed in your brand's warm earth tones — beautiful enough to want to open every day.
+        </p>
+        <ul class="feature-list">
+          <li>28 beautifully designed pages (print or use digitally on iPad)</li>
+          <li>7 themed chapters: Stillness · Trust · Surrender · Gratitude · Fear · Hope · Return</li>
+          <li>Each chapter opens with a Quranic ayah on anxiety or tawakkul</li>
+          <li>Guided journal prompts — no blank page paralysis</li>
+          <li>Daily dhikr tracker built into the back pages</li>
+          <li>Du'a for anxiety printed on the inside cover</li>
+          <li>Instant PDF download — print at home or use on Notability/GoodNotes</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-card-header">
+        <div>
+          <p class="product-type">Product 02 · 5-Day Email Mini Course</p>
+          <h3>Tawakkul Over<br><em>Anxiety</em> — The 5-Day Reset</h3>
+        </div>
+        <div class="product-value">
+          <span class="v-label">Valued at</span>
+          <span class="v-price">$16</span>
+        </div>
+      </div>
+      <div class="product-card-body">
+        <p class="product-desc">
+          Five days. Five short emails. Each one arrives in the morning with one ayah, one reflection from Nabila's own healing journey, one journal prompt (paired with the physical journal), and one practical tool to quiet your mind that day.
+        </p>
+        <ul class="feature-list">
+          <li>Day 1 · "Why anxious minds are not faithless minds" — reframing guilt</li>
+          <li>Day 2 · The 3-breath dhikr reset (works in 60 seconds, anywhere)</li>
+          <li>Day 3 · What tawakkul actually means when you're panicking</li>
+          <li>Day 4 · How to journal through a spiral instead of into one</li>
+          <li>Day 5 · Building your personal "anchor ayah" practice for life</li>
+          <li>Each email: 3-minute read, one action, zero overwhelm</li>
+          <li>Starts the day you purchase — in your inbox tomorrow morning</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bundle Total -->
+    <div class="bundle-total" id="get-it">
+      <div class="bundle-total-left">
+        <h3>The Complete Quiet the Mind Bundle</h3>
+        <p>The journal + the 5-day email course. Everything you need to begin healing your anxiety with Allah at the centre — not as an afterthought.</p>
+      </div>
+      <div class="bundle-total-right">
+        <p class="price-was">$38 total value</p>
+        <p class="price-now">$17</p>
+        <p class="price-note">one-time · instant access</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOR YOU IF ══ -->
+<section class="for-you">
+  <div class="for-you-inner">
+    <span class="section-tag">this is for you if</span>
+    <h2>This bundle was made<br>for you, specifically.</h2>
+
+    <ul class="check-list">
+      <li><span class="check">✦</span> You're a Muslimah who wants to heal — but doesn't want to leave Allah out of it</li>
+      <li><span class="check">✦</span> You've read the ayahs about trust but need help actually practicing it daily</li>
+      <li><span class="check">✦</span> You want a journaling practice but need structure and prompts to begin</li>
+      <li><span class="check">✦</span> You're overwhelmed and need something gentle — not a 60-day program</li>
+      <li><span class="check">✦</span> You want to feel closer to Allah through your healing, not separate from it</li>
+      <li><span class="check">✦</span> You've been putting your own healing off because life is busy and $17 is a yes you can say today</li>
+    </ul>
+
+    <p class="for-you-closing">
+      "You don't need to have it all together to begin. You just need to begin."
+    </p>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about">
+  <div class="about-inner">
+    <div>
+      <span class="about-tag">a note from nabila</span>
+      <h2>I made this because<br>I <em>needed</em> it first.</h2>
+      <p>
+        I know what it's like to sit in Fajr and feel the du'a leave your lips while the anxiety stays exactly where it was. I know the guilt of that. I know what it feels like to know all the right ayahs and still spiral at 2am.
+      </p>
+      <p>
+        I wrote <em>Dua and Tawakkul</em> through that season. And what I discovered wasn't a cure — it was a practice. Showing up to the page. Writing what scares you in front of Allah. Letting the Quran speak back to you through guided reflection.
+      </p>
+      <p>
+        That practice changed something in me. This bundle is me putting that practice into your hands, structured and beautiful and ready for you to open tonight.
+      </p>
+      <p>
+        $17 is what it costs. Yours is what it's worth.
+      </p>
+      <p class="about-sig">— nabila 🤍</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq">
+  <div class="faq-inner">
+    <h2>Before you go — quick answers.</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I get the journal?</p>
+      <p class="faq-a">Instantly. After purchase you'll receive a download link for the PDF immediately. The email course begins the following morning and lands in your inbox for 5 days straight.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Do I need to be a good writer to journal?</p>
+      <p class="faq-a">No. Every prompt is a gentle question — not an essay assignment. You only need to be honest. Even a sentence counts.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Can I use this on my iPad or digitally?</p>
+      <p class="faq-a">Yes. The PDF works beautifully in GoodNotes, Notability, or any PDF annotation app. Or simply print it at home.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Is this only for people with severe anxiety?</p>
+      <p class="faq-a">Not at all. If you overthink, worry often, or simply want more stillness and tawakkul in your daily life — this is for you. It's gentle, not clinical.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What if I'm in a dark place right now?</p>
+      <p class="faq-a">This bundle is a healing tool, not a substitute for professional support. If you're struggling deeply, please also reach out to a mental health professional. This bundle can walk alongside that — not replace it.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Is there a refund policy?</p>
+      <p class="faq-a">Because this is an instant digital download, all sales are final. But if something goes wrong with your purchase, email directly and it'll be sorted out — always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BOTTOM ══ -->
+<section class="cta-bottom">
+  <span class="section-tag">your peace is waiting</span>
+  <h2>Start healing<br><em>tonight.</em></h2>
+  <p>The journal is in your inbox in 60 seconds. The course begins tomorrow morning. You deserve to feel calm again.</p>
+
+  <p class="cta-price-display">$17</p>
+  <p class="cta-note">One-time payment · Instant access · No subscription</p>
+
+  <div class="btn-cta-wrap">
+    <a href="https://gumroad.com" class="btn-big">Get Quiet the Mind →</a>
+    <span class="btn-trust">Secure checkout · PDF + 5-day email course · Instant delivery</span>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  © 2025 with love, nabila · All rights reserved · Made with tawakkul 🤍
+</footer>
+
+<!-- ── STICKY BAR ── -->
+<div class="sticky-bar" id="stickyBar">
+  <p class="sticky-text"><strong>Quiet the Mind Bundle</strong> — Journal + 5-Day Course</p>
+  <a href="#get-it" class="btn-sticky">Get it for $17 →</a>
+</div>
+
+<script>
+  // Show sticky bar after scrolling past hero
+  const hero = document.querySelector('.hero');
+  const bar  = document.getElementById('stickyBar');
+
+  const obs = new IntersectionObserver(([e]) => {
+    bar.classList.toggle('visible', !e.isIntersecting);
+  }, { threshold: 0 });
+
+  obs.observe(hero);
+</script>
+</body>
+</html>
