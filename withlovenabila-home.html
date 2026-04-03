@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>with love, nabila</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Glacial+Indifference&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:  #fefae0;
+      --sand:   #f5edd6;
+      --gold:   #d4a373;
+      --sage:   #ccd5ae;
+      --brown:  #a07850;
+      --dark:   #2e2318;
+      --mid:    #7a6248;
+      --light-gold: rgba(212,163,115,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(212,163,115,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212,163,115,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(204,213,174,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--dark);
+      max-width: 820px;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 1.15rem;
+      color: var(--mid);
+      max-width: 560px;
+      font-style: italic;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      margin-top: 44px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.9s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 16px 34px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--brown);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 15px 34px;
+      border: 1px solid var(--dark);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+    }
+
+    .btn-outline:hover {
+      background: var(--dark);
+      color: var(--cream);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      animation: bounce 2s infinite;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--dark);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 30s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 36px;
+    }
+
+    .marquee-track span.dot {
+      color: var(--cream);
+      opacity: 0.4;
+      padding: 0;
+      letter-spacing: 0;
+      font-size: 0.5rem;
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 100px 40px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.25;
+      color: var(--dark);
+      max-width: 700px;
+    }
+
+    /* ── WELCOME BANNER ── */
+    .welcome-section {
+      background: var(--sand);
+      padding: 80px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(212,163,115,0.25);
+      border-bottom: 1px solid rgba(212,163,115,0.25);
+    }
+
+    .welcome-section p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--dark);
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .welcome-section p em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* ── FOR YOU SECTION ── */
+    .for-you-section {
+      background: var(--cream);
+    }
+
+    .for-you-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .for-you-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .for-you-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 1.05rem;
+      color: var(--dark);
+    }
+
+    .for-you-list li .check {
+      color: var(--gold);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .for-you-side {
+      background: var(--dark);
+      color: var(--cream);
+      padding: 48px 40px;
+      border-radius: 2px;
+    }
+
+    .for-you-side h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .for-you-side p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(254,250,224,0.85);
+    }
+
+    /* ── AYAH BANNER ── */
+    .ayah-section {
+      background: var(--gold);
+      padding: 72px 40px;
+      text-align: center;
+    }
+
+    .ayah-section blockquote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-weight: 400;
+      color: var(--dark);
+      max-width: 740px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+
+    .ayah-ref {
+      display: block;
+      margin-top: 18px;
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      opacity: 0.65;
+    }
+
+    /* ── CARDS SECTION ── */
+    .cards-section {
+      background: var(--sand);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .card {
+      background: var(--cream);
+      border: 1px solid rgba(212,163,115,0.3);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(160,120,80,0.12);
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+
+    .card-label {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .card-arrow {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+
+    .card:hover .card-arrow { gap: 10px; }
+
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .about-photo-placeholder {
+      background: var(--sand);
+      border: 1px solid rgba(212,163,115,0.4);
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--mid);
+    }
+
+    .about-photo-placeholder .ph-icon { font-size: 3rem; opacity: 0.4; }
+
+    .about-photo-placeholder p {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .about-content .greeting {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .about-content p {
+      font-size: 1.05rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.85;
+    }
+
+    .about-content p:last-of-type { margin-bottom: 32px; }
+
+    /* ── EMAIL SECTION ── */
+    .email-section {
+      background: var(--dark);
+      text-align: center;
+      padding: 80px 40px;
+    }
+
+    .email-section .section-label { color: var(--gold); }
+
+    .email-section h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--cream);
+      margin: 12px 0 36px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .email-form {
+      display: flex;
+      gap: 0;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .email-form input {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1px solid rgba(212,163,115,0.4);
+      background: rgba(254,250,224,0.06);
+      color: var(--cream);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .email-form input::placeholder { color: rgba(212,163,115,0.5); }
+
+    .email-form button {
+      padding: 16px 28px;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      cursor: pointer;
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .email-form button:hover { background: var(--brown); color: var(--cream); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--sand);
+      padding: 60px 40px 32px;
+      border-top: 1px solid rgba(212,163,115,0.25);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(212,163,115,0.2);
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      color: var(--mid);
+      max-width: 260px;
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover { color: var(--dark); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+    }
+
+    .footer-copy {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-socials a {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-socials a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .for-you-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .email-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">with love, nabila</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="https://nabilasirajo.substack.com" target="_blank">Blog</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">healing · tawakkul · imaan</div>
+    <h1 class="hero-title">
+      A space for the <span>Muslimah</span><br/>who is finding her way back.
+    </h1>
+    <p class="hero-sub">Letters from healing. Written first to myself — and now, to you.</p>
+    <div class="hero-ctas">
+      <a href="https://nabilasirajo.substack.com" class="btn-primary" target="_blank">→ Read on Substack</a>
+      <a href="#shop" class="btn-outline">Shop Resources</a>
+    </div>
+    <div class="hero-scroll">↓ &nbsp; scroll</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span>healing</span><span class="dot">✦</span>
+      <span>tawakkul</span><span class="dot">✦</span>
+      <span>imaan</span><span class="dot">✦</span>
+      <span>dua</span><span class="dot">✦</span>
+      <span>with love, nabila</span><span class="dot">✦</span>
+      <span>you are seen by Allah</span><span class="dot">✦</span>
+      <span>reset · realign · rebrand · rebuild</span><span class="dot">✦</span>
+      <span>healing</span><span class="dot">✦</span>
+      <span>tawakkul</span><span class="dot">✦</span>
+      <span>imaan</span><span class="dot">✦</span>
+      <span>dua</span><span class="dot">✦</span>
+      <span>with love, nabila</span><span class="dot">✦</span>
+      <span>you are seen by Allah</span><span class="dot">✦</span>
+      <span>reset · realign · rebrand · rebuild</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <section class="welcome-section">
+    <p>Welcome to the place where <em>healing happens with Allah at the center</em> — because real change, real peace, and real becoming can only come from Him.</p>
+  </section>
+
+  <!-- FOR YOU -->
+  <section class="for-you-section" id="read">
+    <div class="section-inner">
+      <div class="section-label">This is for you if...</div>
+      <h2 class="section-title">You know there's more. You're just not sure how to get there.</h2>
+
+      <div class="for-you-grid">
+        <ul class="for-you-list">
+          <li><span class="check">✦</span> You've been carrying a quiet heaviness — and you're ready to put it down.</li>
+          <li><span class="check">✦</span> You want to heal but you don't know where to begin.</li>
+          <li><span class="check">✦</span> You feel like everyone is okay except you — and you're exhausted pretending.</li>
+          <li><span class="check">✦</span> You want a life rooted in tawakkul, not just motivation that fades.</li>
+          <li><span class="check">✦</span> You're a Muslimah navigating life, love, and becoming — and you need a reminder that Allah is enough.</li>
+          <li><span class="check">✦</span> You want to stop drifting and start living with intention and faith.</li>
+        </ul>
+
+        <div class="for-you-side">
+          <h3>Here's what I know to be true.</h3>
+          <p>
+            Healing cannot happen without Allah. People come and go. Seasons change. Life rearranges itself in ways we never planned for. But Allah is the only constant — and when you make Him the center of everything, everything else begins to fall into place.<br/><br/>
+            I learned this not from a book, but from living it. And now I write so you remember it too.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AYAH BANNER -->
+  <section class="ayah-section">
+    <blockquote>
+      "And He found you lost and guided you."
+      <span class="ayah-ref">— Surah Ad-Duha, 93:7</span>
+    </blockquote>
+  </section>
+
+  <!-- CARDS / SHOP -->
+  <section class="cards-section" id="shop">
+    <div class="section-inner">
+      <div class="section-label">Resources for the journey</div>
+      <h2 class="section-title">Choose where you want to begin.</h2>
+
+      <div class="cards-grid">
+
+        <a href="https://nabilasirajo.substack.com" class="card" target="_blank" rel="noopener">
+          <div class="card-icon">✉</div>
+          <div class="card-label">Weekly Letters</div>
+          <div class="card-title">Read on Substack</div>
+          <div class="card-desc">Letters from healing — written from the heart, rooted in faith. Arrive in your inbox every week.</div>
+          <span class="card-arrow">Subscribe → </span>
+        </a>
+
+        <a href="https://selar.com/3n2k36639x" class="card" target="_blank" rel="noopener">
+          <div class="card-icon">📖</div>
+          <div class="card-label">The Book</div>
+          <div class="card-title">Dua and Tawakkul</div>
+          <div class="card-desc">The ebook that started everything — a guide to falling in love with dua and trusting Allah with every single thing.</div>
+          <span class="card-arrow">Buy on Selar → </span>
+        </a>
+
+        <a href="shop.html" class="card">
+          <div class="card-icon">🌿</div>
+          <div class="card-label">The Journal — Coming Soon</div>
+          <div class="card-title">Life Audit Journal</div>
+          <div class="card-desc">Reset. Realign. Rebrand. Rebuild. A fully interactive journal to help you audit your life with clarity and niyyah.</div>
+          <span class="card-arrow">Learn more → </span>
+        </a>
+
+        <a href="shop.html" class="card">
+          <div class="card-icon">🕊️</div>
+          <div class="card-label">The Journal — Coming Soon</div>
+          <div class="card-title">The Quiet Mind Healing Journal</div>
+          <div class="card-desc">A gentle, faith-rooted journal for the Muslimah ready to quiet the noise and return to Allah — one page at a time.</div>
+          <span class="card-arrow">Learn more → </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+
+        <div class="about-photo-placeholder">
+          <div class="ph-icon">🌿</div>
+          <p>Add your photo here</p>
+        </div>
+
+        <div class="about-content">
+          <div class="greeting">Hi, I'm Nabila.</div>
+          <p>
+            Before <em>with love, nabila</em> had a name — before a single word was published — I discovered something that changed everything: the peace of making Allah the absolute center of my life.
+          </p>
+          <p>
+            I started writing letters. Not for an audience, but for myself — from healing, through the hard seasons and the quiet ones. And then I realized: the whole world is healing. Someone may need to read this.
+          </p>
+          <p>
+            So I started publishing on Substack. And now I want to go bigger — because this message is too important to stay small.
+          </p>
+          <p>
+            I write for Muslimahs navigating life. The beautiful parts, the broken parts, and everything in between. I write about dua, tawakkul, the miracles of Allah, and what it means to be truly seen by Him.
+          </p>
+          <a href="shop.html" class="btn-primary">→ Visit the Shop</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL SIGNUP — Mailchimp -->
+  <section class="email-section" id="connect">
+    <div class="section-label">Stay connected</div>
+    <h2>Get letters from healing delivered to your inbox.</h2>
+    <p style="color:rgba(254,250,224,0.6); font-style:italic; font-size:1rem; margin-bottom:36px; max-width:480px; margin-left:auto; margin-right:auto;">Every Thursday — a letter written just for you. Faith, healing, and tawakkul, straight to your inbox. Free.</p>
+
+    <!-- Mailchimp embed -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+    <style>
+      /* Override Mailchimp defaults to match brand */
+      #mc_embed_signup {
+        background: transparent !important;
+        width: 100% !important;
+        max-width: 480px;
+        margin: 0 auto;
+        font-family: 'Glacial Indifference', sans-serif !important;
+        color: var(--cream) !important;
+      }
+      #mc_embed_signup h2 { display: none; }
+      #mc_embed_signup .indicates-required { display: none; }
+      #mc_embed_signup .mc-field-group {
+        padding-bottom: 12px !important;
+        width: 100% !important;
+      }
+      #mc_embed_signup .mc-field-group label {
+        font-family: 'Glacial Indifference', sans-serif !important;
+        font-size: 0.68rem !important;
+        letter-spacing: 0.18em !important;
+        text-transform: uppercase !important;
+        color: var(--gold) !important;
+        margin-bottom: 6px !important;
+        display: block;
+      }
+      #mc_embed_signup .mc-field-group input {
+        width: 100% !important;
+        padding: 14px 18px !important;
+        background: rgba(254,250,224,0.07) !important;
+        border: 1px solid rgba(212,163,115,0.4) !important;
+        color: var(--cream) !important;
+        font-family: 'EB Garamond', Georgia, serif !important;
+        font-size: 1rem !important;
+        border-radius: 0 !important;
+        box-sizing: border-box !important;
+      }
+      #mc_embed_signup .mc-field-group input::placeholder { color: rgba(212,163,115,0.4) !important; }
+      #mc_embed_signup .mc-field-group input:focus {
+        outline: none !important;
+        border-color: var(--gold) !important;
+        background: rgba(254,250,224,0.1) !important;
+      }
+      #mc_embed_signup #mc-embedded-subscribe {
+        background: var(--gold) !important;
+        color: var(--dark) !important;
+        font-family: 'Glacial Indifference', sans-serif !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 0.18em !important;
+        text-transform: uppercase !important;
+        padding: 16px 36px !important;
+        border: none !important;
+        border-radius: 0 !important;
+        cursor: pointer !important;
+        width: 100% !important;
+        margin-top: 8px !important;
+        transition: background 0.2s !important;
+      }
+      #mc_embed_signup #mc-embedded-subscribe:hover {
+        background: var(--cream) !important;
+      }
+      #mc_embed_signup .refferal_badge { display: none !important; }
+      #mc_embed_signup div#mce-responses { width: 100% !important; }
+      #mc_embed_signup #mce-success-response {
+        color: var(--sage) !important;
+        font-style: italic;
+        font-size: 1rem;
+        padding: 12px 0 !important;
+      }
+      #mc_embed_signup #mce-error-response {
+        color: #e8a0a0 !important;
+        font-size: 0.9rem;
+        padding: 12px 0 !important;
+      }
+      #mc_embed_signup .foot { flex-direction: column !important; }
+    </style>
+
+    <div id="mc_embed_signup">
+      <form action="https://gmail.us9.list-manage.com/subscribe/post?u=be8199004a3a3df9db5c60210&amp;id=a807e9c6dc&amp;f_id=004affe3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll">
+          <div class="mc-field-group">
+            <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+            <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" placeholder="your@email.com">
+          </div>
+          <div class="mc-field-group">
+            <label for="mce-FNAME">First Name</label>
+            <input type="text" name="FNAME" class="text" id="mce-FNAME" placeholder="Your name">
+          </div>
+          <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display:none;"></div>
+            <div class="response" id="mce-success-response" style="display:none;"></div>
+          </div>
+          <div aria-hidden="true" style="position:absolute; left:-5000px;">
+            <input type="text" name="b_be8199004a3a3df9db5c60210_a807e9c6dc" tabindex="-1" value="">
+          </div>
+          <div class="optionalParent">
+            <div class="clear foot">
+              <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="→ Join the Community">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        window.fnames = new Array(); window.ftypes = new Array();
+        fnames[0]='EMAIL'; ftypes[0]='email';
+        fnames[1]='FNAME'; ftypes[1]='text';
+        fnames[2]='LNAME'; ftypes[2]='text';
+      }(jQuery));
+      var $mcj = jQuery.noConflict(true);
+    </script>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div>
+          <div class="footer-brand">with love, nabila</div>
+          <div class="footer-tagline">Healing · tawakkul · imaan. Letters for the Muslimah finding her way back to Allah.</div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#about">About Nabila</a></li>
+            <li><a href="https://nabilasirajo.substack.com" target="_blank">Substack</a></li>
+            <li><a href="https://selar.com/3n2k36639x" target="_blank">Dua & Tawakkul Ebook</a></li>
+            <li><a href="shop.html">Journals & Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://instagram.com/withlove.nabilas" target="_blank">Instagram</a></li>
+            <li><a href="https://tiktok.com/@withlovenabila" target="_blank">TikTok</a></li>
+            <li><a href="https://pinterest.com/withlovenabila" target="_blank">Pinterest</a></li>
+            <li><a href="https://nabilasirajo.substack.com" target="_blank">Newsletter</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 with love, nabila · All rights reserved</div>
+        <div class="footer-socials">
+          <a href="https://instagram.com/withlove.nabilas" target="_blank">Instagram</a>
+          <a href="https://tiktok.com/@withlovenabila" target="_blank">TikTok</a>
+          <a href="https://pinterest.com/withlovenabila" target="_blank">Pinterest</a>
+          <a href="https://nabilasirajo.substack.com" target="_blank">Substack</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
