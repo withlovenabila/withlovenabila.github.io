@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Shop — With Love, Nabila</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+@font-face{font-family:"Hatton";src:local("Hatton");font-weight:400;}
+@font-face{font-family:"Glacial Indifference";src:local("GlacialIndifference-Regular");font-weight:400;}
+@font-face{font-family:"Pinyon Script";src:local("PinyonScript");font-weight:400;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#2a2018;--caramel:#d4a373;--caramel-light:#e8c99a;--caramel-dark:#b8864e;
+  --sage:#ccd5ae;--parchment:#fefae0;--sand:#f5edd6;--mid:#7a6248;
+  --font-display:"Hatton","Cormorant Garamond",Georgia,serif;
+  --font-subtitle:"Playfair Display",Georgia,serif;
+  --font-body:"Glacial Indifference","Gill Sans",sans-serif;
+  --font-script:"Pinyon Script","Cormorant Garamond",cursive;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--parchment);color:var(--ink);font-family:var(--font-body);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(42,32,24,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,163,115,0.15);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-brand-text{font-family:var(--font-script);font-size:1.5rem;color:var(--caramel);}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-link{font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(254,250,224,0.6);text-decoration:none;transition:color 0.2s;}
+.nav-link:hover,.nav-link.active{color:var(--caramel);}
+.nav-cta{background:var(--caramel);color:var(--ink);font-family:var(--font-body);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;padding:10px 22px;text-decoration:none;}
+.logo-svg{width:48px;height:48px;}
+.page-hero{background:var(--ink);padding:160px 48px 80px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(212,163,115,0.07) 0%,transparent 60%);}
+.eyebrow{font-family:var(--font-body);font-size:0.68rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--caramel);margin-bottom:20px;}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,7vw,5rem);font-weight:400;color:var(--parchment);line-height:1.1;margin-bottom:18px;}
+.page-hero h1 em{font-family:var(--font-script);font-style:normal;color:var(--caramel);}
+.page-hero p{font-family:var(--font-subtitle);font-style:italic;font-size:1.05rem;color:rgba(254,250,224,0.55);max-width:460px;margin:0 auto;}
+main{max-width:1100px;margin:0 auto;padding:80px 48px 120px;}
+.shop-label{font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--caramel-dark);margin-bottom:14px;}
+.shop-title{font-family:var(--font-display);font-size:clamp(1.7rem,3vw,2.4rem);font-weight:400;color:var(--ink);margin-bottom:52px;}
+.shop-title em{font-family:var(--font-script);font-style:normal;color:var(--caramel-dark);}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:96px;}
+.product-card{background:var(--sand);border:1px solid rgba(212,163,115,0.25);display:flex;flex-direction:column;overflow:hidden;transition:transform 0.25s,box-shadow 0.3s;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(160,120,80,0.14);}
+.product-top{padding:52px 36px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;min-height:200px;justify-content:center;position:relative;}
+.product-top.dark{background:var(--ink);}
+.product-top.sage-bg{background:var(--sage);}
+.product-top.caramel-bg{background:var(--caramel);}
+.product-badge{position:absolute;top:14px;right:14px;font-family:var(--font-body);font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;background:var(--caramel);color:var(--ink);padding:4px 10px;}
+.product-badge.live{background:var(--ink);color:var(--caramel);}
+.product-icon{font-size:2.6rem;}
+.product-type{font-family:var(--font-body);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--caramel);}
+.product-top.sage-bg .product-type,.product-top.caramel-bg .product-type{color:var(--ink);}
+.product-name{font-family:var(--font-display);font-style:italic;font-size:1.35rem;font-weight:400;color:var(--parchment);line-height:1.25;}
+.product-top.sage-bg .product-name,.product-top.caramel-bg .product-name{color:var(--ink);}
+.product-body{padding:32px 32px 36px;display:flex;flex-direction:column;gap:18px;flex:1;background:var(--parchment);}
+.product-desc{font-family:var(--font-subtitle);font-size:0.98rem;color:var(--mid);line-height:1.75;flex:1;}
+.product-features{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.product-features li{font-family:var(--font-subtitle);font-size:0.9rem;color:var(--ink);display:flex;gap:8px;align-items:flex-start;}
+.product-features li::before{content:"\2736";color:var(--caramel);font-size:0.6rem;flex-shrink:0;margin-top:5px;}
+.btn-buy{display:block;width:100%;text-align:center;background:var(--ink);color:var(--parchment);font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;padding:17px 24px;text-decoration:none;border:none;cursor:pointer;transition:background 0.25s;margin-top:8px;}
+.btn-buy:hover{background:var(--caramel-dark);}
+.btn-buy.soon{background:rgba(42,32,24,0.25);cursor:default;color:var(--mid);}
+.btn-buy.soon:hover{background:rgba(42,32,24,0.25);}
+.affiliates-section{background:var(--ink);padding:64px 60px;margin-bottom:80px;}
+.a-label{font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--caramel);margin-bottom:12px;}
+.affiliates-section h2{font-family:var(--font-display);font-style:italic;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--parchment);margin-bottom:18px;}
+.lead-p{font-family:var(--font-subtitle);font-size:1rem;color:rgba(254,250,224,0.7);max-width:580px;margin-bottom:44px;line-height:1.8;}
+.steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:40px;}
+.step-box{display:flex;flex-direction:column;gap:10px;}
+.step-num{font-family:var(--font-display);font-style:italic;font-size:2.5rem;color:var(--caramel);line-height:1;}
+.step-title{font-family:var(--font-body);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--parchment);}
+.step-desc{font-family:var(--font-subtitle);font-size:0.9rem;color:rgba(254,250,224,0.6);line-height:1.7;}
+.note-box{background:rgba(212,163,115,0.1);border:1px solid rgba(212,163,115,0.25);padding:22px 26px;display:flex;gap:14px;margin-bottom:32px;}
+.note-box p{font-family:var(--font-subtitle);font-size:0.95rem;color:rgba(254,250,224,0.75);margin:0;line-height:1.75;}
+.btn-caramel{display:inline-block;background:var(--caramel);color:var(--ink);font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;padding:16px 34px;text-decoration:none;}
+.faq-item{border-bottom:1px solid rgba(212,163,115,0.18);padding:24px 0;}
+.faq-q{font-family:var(--font-display);font-style:italic;font-size:1.1rem;color:var(--ink);margin-bottom:10px;}
+.faq-a{font-family:var(--font-subtitle);font-size:0.95rem;color:var(--mid);max-width:640px;line-height:1.75;}
+footer{background:var(--ink);border-top:1px solid rgba(212,163,115,0.15);padding:48px;text-align:center;}
+.footer-brand{font-family:var(--font-script);font-size:1.8rem;color:var(--caramel);display:block;margin-bottom:16px;}
+.footer-links{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.footer-links a{font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(254,250,224,0.4);text-decoration:none;}
+.footer-links a:hover{color:var(--caramel);}
+.footer-copy{font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(254,250,224,0.2);}
+@media(max-width:900px){nav{padding:0 20px;}.nav-links{display:none;}.page-hero{padding:120px 24px 64px;}main{padding:60px 24px 80px;}.products-grid{grid-template-columns:1fr;}.steps-row{grid-template-columns:1fr;}.affiliates-section{padding:48px 24px;}footer{padding:40px 24px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="2.svg" alt="logo" class="logo-svg" onerror="this.style.display='none'"/>
+    <span class="nav-brand-text">With Love, Nabila</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+    <li><a href="shop.html" class="nav-link active">The Shop</a></li>
+    <li><a href="https://nabilasirajo.substack.com" target="_blank" class="nav-link">Blog</a></li>
+    <li><a href="connect.html" class="nav-link">Connect</a></li>
+    <li><a href="shop.html" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+<div class="page-hero">
+  <div class="eyebrow">Resources for the journey</div>
+  <h1><em>The Shop</em></h1>
+  <p>Everything here was made with you in mind — the Muslimah healing, growing, and becoming.</p>
+</div>
+<main>
+  <div class="shop-label">Available now and coming soon</div>
+  <div class="shop-title">Choose where you want to <em>begin.</em></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-top dark">
+        <div class="product-badge live">Available Now</div>
+        <div class="product-icon">📖</div>
+        <div class="product-type">Ebook</div>
+        <div class="product-name">Dua and Tawakkul</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">The book that started everything. A faith-rooted guide to falling deeply in love with dua and trusting Allah completely — with every single thing.</p>
+        <ul class="product-features">
+          <li>What dua and tawakkul truly mean</li>
+          <li>Making Allah the center of everything</li>
+          <li>Practical guidance for healing Muslimahs</li>
+          <li>Reminders for uncertain seasons</li>
+        </ul>
+        <a href="https://selar.com/3n2k36639x" class="btn-buy" target="_blank" rel="noopener">&#8594; Buy Now on Selar</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-top sage-bg">
+        <div class="product-badge">Coming Soon</div>
+        <div class="product-icon">🌿</div>
+        <div class="product-type">Interactive Journal</div>
+        <div class="product-name">Life Audit Journal</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">A fully interactive journal to help you audit every area of your life with clarity, niyyah, and faith. Reset. Realign. Rebrand. Rebuild.</p>
+        <ul class="product-features">
+          <li>Reset your mindset and intentions</li>
+          <li>Realign with your values and deen</li>
+          <li>Rebrand who you are becoming</li>
+          <li>Rebuild your life with purpose</li>
+        </ul>
+        <a class="btn-buy soon">Coming Soon &#8212; Stay tuned 🤍</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-top caramel-bg">
+        <div class="product-badge">Coming Soon</div>
+        <div class="product-icon">🕊️</div>
+        <div class="product-type">Healing Journal</div>
+        <div class="product-name">The Quiet Mind Healing Journal</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">A gentle, faith-rooted journal for the Muslimah ready to quiet the noise and return to Allah — one page, one dua, one reflection at a time.</p>
+        <ul class="product-features">
+          <li>Daily prompts rooted in dua and dhikr</li>
+          <li>Guided reflections for healing and peace</li>
+          <li>Space to pour out what you carry alone</li>
+          <li>Reminders that Allah is always near</li>
+        </ul>
+        <a class="btn-buy soon">Coming Soon &#8212; Stay tuned 🤍</a>
+      </div>
+    </div>
+  </div>
+  <div class="affiliates-section" id="affiliates">
+    <div class="a-label">Share and Earn</div>
+    <h2>Love what you found here? Share it and earn when others buy too.</h2>
+    <p class="lead-p">Selar has a built-in affiliate program. Get your unique referral link, share with your community, and earn a commission every time someone buys through you.</p>
+    <div class="steps-row">
+      <div class="step-box"><div class="step-num">01</div><div class="step-title">Buy the product</div><div class="step-desc">Purchase the ebook or journal first to become an affiliate for it.</div></div>
+      <div class="step-box"><div class="step-num">02</div><div class="step-title">Message Nabila</div><div class="step-desc">DM on Instagram or TikTok and I will add you to my Selar affiliate list with your unique link.</div></div>
+      <div class="step-box"><div class="step-num">03</div><div class="step-title">Share and earn</div><div class="step-desc">Every purchase through your link earns you a commission automatically from Selar.</div></div>
+    </div>
+    <div class="note-box">
+      <span style="font-size:1.2rem;flex-shrink:0;">🤍</span>
+      <p>This is not just about earning. It is about spreading something meaningful. If this helped you heal, share it. Let it reach the Muslimah who needs it most.</p>
+    </div>
+    <a href="https://instagram.com/withlove.nabilas" class="btn-caramel" target="_blank" rel="noopener">&#8594; Message Me to Become an Affiliate</a>
+  </div>
+  <div class="shop-label">Questions</div>
+  <div class="shop-title" style="margin-bottom:32px;">You might be <em>wondering...</em></div>
+  <div class="faq-item"><div class="faq-q">How do I receive my ebook after purchase?</div><div class="faq-a">Selar delivers your ebook instantly after payment. A download link arrives by email immediately.</div></div>
+  <div class="faq-item"><div class="faq-q">What format is the ebook in?</div><div class="faq-a">A PDF you can read on your phone, tablet, laptop, or print out. Works on any device.</div></div>
+  <div class="faq-item"><div class="faq-q">When will the journals be available?</div><div class="faq-a">Soon, insha'Allah! Follow on Instagram and subscribe to the newsletter to be first to know.</div></div>
+  <div class="faq-item"><div class="faq-q">I have another question.</div><div class="faq-a">Send a message on <a href="https://instagram.com/withlove.nabilas" target="_blank" style="color:var(--caramel-dark);">Instagram</a> or <a href="https://tiktok.com/@withlovenabila" target="_blank" style="color:var(--caramel-dark);">TikTok</a>. Every message is read. 🤍</div></div>
+</main>
+<footer>
+  <span class="footer-brand">With Love, Nabila</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="shop.html">The Shop</a>
+    <a href="https://nabilasirajo.substack.com" target="_blank">Blog</a><a href="connect.html">Connect</a>
+  </div>
+  <div class="footer-copy">&#169; 2025 With Love, Nabila &#183; All rights reserved</div>
+</footer>
+</body>
+</html>

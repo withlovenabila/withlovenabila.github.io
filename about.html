@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — With Love, Nabila</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+@font-face{font-family:'Hatton';src:local('Hatton'),local('Hatton-Regular');font-weight:400;}
+@font-face{font-family:'Hatton';src:local('Hatton-Medium'),local('Hatton Medium');font-weight:500;}
+@font-face{font-family:'Glacial Indifference';src:local('GlacialIndifference-Regular'),local('Glacial Indifference Regular');font-weight:400;}
+@font-face{font-family:'Pinyon Script';src:local('PinyonScript'),local('Pinyon Script');font-weight:400;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#2a2018;--caramel:#d4a373;--caramel-light:#e8c99a;--caramel-dark:#b8864e;
+  --sage:#ccd5ae;--sage-dark:#a3b18a;--parchment:#fefae0;--sand:#f5edd6;--white:#fffef7;--mid:#7a6248;
+  --font-display:'Hatton','Cormorant Garamond',Georgia,serif;
+  --font-subtitle:'Playfair Display',Georgia,serif;
+  --font-body:'Glacial Indifference','Gill Sans',sans-serif;
+  --font-script:'Pinyon Script','Cormorant Garamond',cursive;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--parchment);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.8;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(42,32,24,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,163,115,0.15);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-brand-text{font-family:var(--font-script);font-size:1.5rem;color:var(--caramel);letter-spacing:0.04em;}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-link{font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(254,250,224,0.6);text-decoration:none;transition:color 0.2s;}
+.nav-link:hover,.nav-link.active{color:var(--caramel);}
+.nav-cta{background:var(--caramel);color:var(--ink);font-family:var(--font-body);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;padding:10px 22px;text-decoration:none;transition:background 0.25s;}
+.nav-cta:hover{background:var(--caramel-light);}
+.logo-svg{width:48px;height:48px;display:block;}
+
+/* PAGE HERO */
+.page-hero{background:var(--ink);padding:160px 48px 100px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(212,163,115,0.08) 0%,transparent 60%);}
+.page-hero .eyebrow{font-family:var(--font-body);font-size:0.68rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--caramel);margin-bottom:20px;}
+.page-hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,7vw,5.5rem);font-weight:400;color:var(--parchment);line-height:1.1;max-width:700px;margin:0 auto 20px;}
+.page-hero h1 em{font-family:var(--font-script);font-style:normal;color:var(--caramel);font-size:1.1em;}
+.page-hero p{font-family:var(--font-subtitle);font-style:italic;font-size:1.1rem;color:rgba(254,250,224,0.55);max-width:480px;margin:0 auto;}
+
+/* CONTENT */
+.content-wrap{max-width:780px;margin:0 auto;padding:100px 48px 120px;}
+.ayah-block{background:var(--sand);border-left:3px solid var(--caramel);padding:28px 36px;margin:0 0 60px;border-radius:0 8px 8px 0;}
+.ayah-block .arabic{font-family:var(--font-display);font-style:italic;font-size:1.05rem;color:var(--caramel-dark);display:block;margin-bottom:8px;}
+.ayah-block .translation{font-family:var(--font-subtitle);font-style:italic;font-size:1rem;color:var(--mid);line-height:1.65;}
+.ayah-block .ref{display:block;margin-top:8px;font-family:var(--font-body);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--caramel);}
+.content-wrap h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;color:var(--ink);margin:56px 0 20px;}
+.content-wrap h2 em{font-family:var(--font-script);font-style:normal;color:var(--caramel-dark);font-size:1.15em;}
+.rule{width:48px;height:2px;background:var(--caramel);margin:0 0 32px;}
+.content-wrap p{font-family:var(--font-subtitle);font-size:1.08rem;color:var(--ink);margin-bottom:22px;line-height:1.88;}
+.content-wrap p em{font-style:italic;color:var(--mid);}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0 60px;}
+.value-item{background:var(--sand);border-left:3px solid var(--caramel);padding:22px 20px;}
+.value-item .v-num{font-family:var(--font-display);font-style:italic;font-size:1.8rem;color:rgba(212,163,115,0.35);line-height:1;margin-bottom:8px;}
+.value-item .v-title{font-family:var(--font-body);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--caramel-dark);margin-bottom:6px;}
+.value-item .v-desc{font-family:var(--font-subtitle);font-size:0.9rem;color:var(--mid);line-height:1.65;}
+
+/* LINKS */
+.links-section{background:var(--ink);padding:56px 48px;margin:60px 0 0;}
+.links-section h3{font-family:var(--font-display);font-size:1.5rem;font-weight:400;color:var(--caramel);margin-bottom:28px;}
+.link-item{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid rgba(212,163,115,0.12);text-decoration:none;color:var(--parchment);transition:gap 0.2s;}
+.link-item:last-child{border-bottom:none;}
+.link-item:hover{gap:22px;}
+.link-icon{width:40px;height:40px;border-radius:50%;background:rgba(212,163,115,0.12);border:1px solid rgba(212,163,115,0.25);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;color:var(--caramel);}
+.link-label{display:flex;flex-direction:column;}
+.link-title{font-family:var(--font-display);font-style:italic;font-size:1rem;color:var(--parchment);}
+.link-desc{font-family:var(--font-body);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(212,163,115,0.6);margin-top:2px;}
+
+/* CTA */
+.btn-gold{background:var(--caramel);color:var(--ink);font-family:var(--font-body);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;padding:16px 36px;text-decoration:none;border:none;cursor:pointer;transition:background 0.25s,transform 0.2s;display:inline-block;}
+.btn-gold:hover{background:var(--caramel-light);transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(212,163,115,0.15);padding:48px;text-align:center;}
+.footer-brand{font-family:var(--font-script);font-size:1.8rem;color:var(--caramel);display:block;margin-bottom:16px;}
+.footer-links{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.footer-links a{font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(254,250,224,0.4);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--caramel);}
+.footer-copy{font-family:var(--font-body);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(254,250,224,0.2);}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}.nav-links{display:none;}
+  .page-hero{padding:120px 24px 72px;}
+  .content-wrap{padding:72px 24px 80px;}
+  .values-grid{grid-template-columns:1fr;}
+  .links-section{padding:40px 24px;}
+  footer{padding:40px 24px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="2.svg" alt="logo" class="logo-svg" onerror="this.style.display='none'"/>
+    <span class="nav-brand-text">With Love, Nabila</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="about.html" class="nav-link active">About</a></li>
+    <li><a href="shop.html" class="nav-link">The Shop</a></li>
+    <li><a href="https://nabilasirajo.substack.com" target="_blank" class="nav-link">Blog</a></li>
+    <li><a href="connect.html" class="nav-link">Connect</a></li>
+    <li><a href="shop.html" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">The story behind the brand</div>
+  <h1>About <em>With Love,<br/>Nabila</em></h1>
+  <p>A brand built from healing, rooted in faith, and written with love.</p>
+</div>
+
+<div class="content-wrap">
+  <div class="ayah-block">
+    <span class="arabic">"And He found you lost and guided you."</span>
+    <span class="translation">This is the ayah that started everything. The reminder that where I am now is not where I have to stay.</span>
+    <span class="ref">— Surah Ad-Duha · 93:7</span>
+  </div>
+
+  <h2>How <em>With Love, Nabila</em> began</h2>
+  <div class="rule"></div>
+  <p>This started as a letter from healing — written to myself, in the quiet moments between dua and dawn. Words that didn't need an audience. Just a girl, her journal, and Allah.</p>
+  <p>And then something shifted. I realized: the whole world is healing. Someone, somewhere, needs to read this. So I started publishing on Substack. And now, alhamdulillah, I want to go bigger — because this message is too important to stay small.</p>
+
+  <h2>Before the writing, there was <em>Allah</em></h2>
+  <div class="rule"></div>
+  <p>Before <em>With Love, Nabila</em> had a name — before a single word was published — I found something that changed everything: the peace of making Allah the center of every single thing in my life.</p>
+  <p>I learned that real healing cannot happen without Allah. That He is the only true constant — people come and go, seasons change, and life never stays the same. But Allah? Allah is always there. He was there when no one else was. He saw me when I felt invisible.</p>
+  <p>And in that knowing, I fell deeply in love with dua and tawakkul. With the miracle of being heard. With the beauty of trusting fully — not in outcomes, not in people, but in Al-Wakeel, the One who handles all affairs.</p>
+
+  <h2>What this space is <em>for</em></h2>
+  <div class="rule"></div>
+  <p>This space is for Muslimahs navigating life — the beautiful parts, the broken parts, and everything in between. You will find essays on healing, faith, tawakkul, and becoming. You will find honesty, softness, and always — always — a reminder that Allah is enough.</p>
+
+  <div class="values-grid">
+    <div class="value-item">
+      <div class="v-num">01</div>
+      <div class="v-title">Healing</div>
+      <div class="v-desc">Real, honest healing — not the performative kind. We sit in the hard parts here.</div>
+    </div>
+    <div class="value-item">
+      <div class="v-num">02</div>
+      <div class="v-title">Tawakkul</div>
+      <div class="v-desc">Complete trust in Allah — not passivity, but the deep knowing that He handles what we cannot.</div>
+    </div>
+    <div class="value-item">
+      <div class="v-num">03</div>
+      <div class="v-title">Imaan</div>
+      <div class="v-desc">Faith that grows through hardship — not despite it. This is the foundation of everything.</div>
+    </div>
+  </div>
+
+  <a href="shop.html" class="btn-gold">→ Explore the Shop</a>
+</div>
+
+<!-- LINKS -->
+<div class="links-section">
+  <div style="max-width:780px;margin:0 auto;">
+    <h3>Find me everywhere ✦</h3>
+    <a class="link-item" href="https://nabilasirajo.substack.com" target="_blank" rel="noopener">
+      <div class="link-icon">✉</div>
+      <div class="link-label"><span class="link-title">Read on Substack</span><span class="link-desc">Letters from healing · Weekly</span></div>
+    </a>
+    <a class="link-item" href="https://selar.com/3n2k36639x" target="_blank" rel="noopener">
+      <div class="link-icon">📖</div>
+      <div class="link-label"><span class="link-title">Dua and Tawakkul — the ebook</span><span class="link-desc">Buy on Selar</span></div>
+    </a>
+    <a class="link-item" href="shop.html">
+      <div class="link-icon">🌿</div>
+      <div class="link-label"><span class="link-title">Healing Journals</span><span class="link-desc">Coming soon to the shop</span></div>
+    </a>
+    <a class="link-item" href="https://instagram.com/withlove.nabilas" target="_blank" rel="noopener">
+      <div class="link-icon">◎</div>
+      <div class="link-label"><span class="link-title">Instagram</span><span class="link-desc">@withlove.nabilas</span></div>
+    </a>
+    <a class="link-item" href="https://tiktok.com/@withlovenabila" target="_blank" rel="noopener">
+      <div class="link-icon">▷</div>
+      <div class="link-label"><span class="link-title">TikTok</span><span class="link-desc">@withlovenabila</span></div>
+    </a>
+    <a class="link-item" href="https://pinterest.com/withlovenabila" target="_blank" rel="noopener">
+      <div class="link-icon">📌</div>
+      <div class="link-label"><span class="link-title">Pinterest</span><span class="link-desc">@withlovenabila</span></div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-brand">With Love, Nabila</span>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">The Shop</a>
+    <a href="https://nabilasirajo.substack.com" target="_blank">Blog</a>
+    <a href="connect.html">Connect</a>
+  </div>
+  <div class="footer-copy">© 2025 With Love, Nabila · All rights reserved</div>
+</footer>
+</body>
+</html>

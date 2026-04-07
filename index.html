@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>With Love, Nabila — Healing · Tawakkul · Imaan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ── FONT FACES ── */
+@font-face { font-family:'Hatton'; src:local('Hatton'),local('Hatton-Regular'); font-weight:400; }
+@font-face { font-family:'Hatton'; src:local('Hatton-Medium'),local('Hatton Medium'); font-weight:500; }
+@font-face { font-family:'Glacial Indifference'; src:local('GlacialIndifference-Regular'),local('Glacial Indifference Regular'); font-weight:400; }
+@font-face { font-family:'Pinyon Script'; src:local('PinyonScript'),local('Pinyon Script'); font-weight:400; }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#2a2018;
+  --caramel:#d4a373;
+  --caramel-light:#e8c99a;
+  --caramel-dark:#b8864e;
+  --sage:#ccd5ae;
+  --sage-dark:#a3b18a;
+  --parchment:#fefae0;
+  --sand:#f5edd6;
+  --white:#fffef7;
+  --mid:#7a6248;
+  --font-display:'Hatton','Cormorant Garamond',Georgia,serif;
+  --font-subtitle:'Playfair Display',Georgia,serif;
+  --font-body:'Glacial Indifference','Gill Sans',sans-serif;
+  --font-script:'Pinyon Script','Cormorant Garamond',cursive;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--parchment);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.8;overflow-x:hidden;}
+
+/* ── LOGO SVG INLINE ── */
+.logo-svg{width:72px;height:72px;display:block;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  background:rgba(254,250,224,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(212,163,115,0.2);
+  transition:all 0.3s ease;
+}
+nav.scrolled{height:60px;background:rgba(42,32,24,0.97);}
+nav.scrolled .nav-link{color:var(--caramel);}
+nav.scrolled .nav-link:hover{color:var(--parchment);}
+nav.scrolled .nav-brand-text{color:var(--caramel);}
+
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.nav-brand-text{
+  font-family:var(--font-script);
+  font-size:1.5rem;color:var(--ink);
+  transition:color 0.3s;
+  letter-spacing:0.04em;
+}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-link{
+  font-family:var(--font-body);
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mid);text-decoration:none;
+  transition:color 0.2s;
+  position:relative;
+}
+.nav-link::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;
+  height:1px;background:var(--caramel);
+  transform:scaleX(0);transition:transform 0.25s ease;
+}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1);}
+.nav-link:hover,.nav-link.active{color:var(--ink);}
+.nav-cta{
+  background:var(--ink);color:var(--parchment);
+  font-family:var(--font-body);font-size:0.7rem;
+  letter-spacing:0.18em;text-transform:uppercase;
+  padding:10px 22px;text-decoration:none;
+  transition:background 0.25s;
+}
+.nav-cta:hover{background:var(--caramel-dark);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:var(--ink);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 28px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 20%,rgba(212,163,115,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 80%,rgba(204,213,174,0.05) 0%,transparent 60%);
+}
+.hero-logo-wrap{
+  margin-bottom:40px;
+  animation:fadeUp 1.2s ease both;
+}
+.hero-logo-img{
+  width:120px;height:120px;
+  border-radius:50%;
+  border:1px solid rgba(212,163,115,0.25);
+  padding:8px;
+}
+.hero-eyebrow{
+  font-family:var(--font-body);
+  font-size:0.68rem;letter-spacing:0.38em;text-transform:uppercase;
+  color:var(--caramel);margin-bottom:24px;
+  animation:fadeUp 1s 0.1s ease both;opacity:0;animation-fill-mode:both;
+}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,9vw,7rem);
+  font-weight:400;line-height:1.05;
+  color:var(--parchment);
+  max-width:900px;
+  letter-spacing:-0.01em;
+  animation:fadeUp 1s 0.2s ease both;opacity:0;animation-fill-mode:both;
+}
+.hero-title em{
+  font-family:var(--font-script);
+  font-style:normal;
+  color:var(--caramel);
+  font-size:1.15em;
+}
+.hero-divider{
+  width:60px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--caramel),transparent);
+  margin:36px auto;
+  animation:fadeUp 1s 0.3s ease both;opacity:0;animation-fill-mode:both;
+}
+.hero-sub{
+  font-family:var(--font-subtitle);
+  font-style:italic;font-size:1.2rem;
+  color:rgba(254,250,224,0.6);
+  max-width:520px;line-height:1.75;
+  animation:fadeUp 1s 0.35s ease both;opacity:0;animation-fill-mode:both;
+}
+.hero-ctas{
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  margin-top:48px;
+  animation:fadeUp 1s 0.45s ease both;opacity:0;animation-fill-mode:both;
+}
+.btn-gold{
+  background:var(--caramel);color:var(--ink);
+  font-family:var(--font-body);font-size:0.72rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  padding:16px 36px;text-decoration:none;
+  border:none;cursor:pointer;
+  transition:background 0.25s,transform 0.2s;
+  display:inline-block;
+}
+.btn-gold:hover{background:var(--caramel-light);transform:translateY(-2px);}
+.btn-ghost{
+  background:transparent;color:var(--parchment);
+  font-family:var(--font-body);font-size:0.72rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  padding:15px 36px;text-decoration:none;
+  border:1px solid rgba(254,250,224,0.3);
+  transition:all 0.25s;display:inline-block;
+}
+.btn-ghost:hover{background:rgba(254,250,224,0.08);border-color:var(--caramel);}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-body);font-size:0.62rem;
+  letter-spacing:0.24em;text-transform:uppercase;
+  color:rgba(212,163,115,0.5);
+  animation:bounce 2.5s infinite;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  background:var(--caramel);
+  padding:13px 0;overflow:hidden;white-space:nowrap;
+}
+.marquee-track{display:inline-block;animation:marquee 28s linear infinite;}
+.marquee-track span{
+  font-family:var(--font-body);
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--ink);padding:0 32px;
+}
+.marquee-track .sep{padding:0;opacity:0.5;font-size:0.5rem;}
+
+/* ── SECTIONS ── */
+.section{padding:110px 48px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-label{
+  font-family:var(--font-body);
+  font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--caramel-dark);margin-bottom:16px;
+}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.9rem,4vw,3rem);
+  font-weight:400;line-height:1.2;
+  color:var(--ink);
+}
+.section-title em{
+  font-family:var(--font-script);
+  font-style:normal;color:var(--caramel-dark);
+  font-size:1.1em;
+}
+
+/* ── WELCOME ── */
+.welcome-section{
+  background:var(--sand);
+  padding:80px 48px;
+  text-align:center;
+  border-top:1px solid rgba(212,163,115,0.2);
+  border-bottom:1px solid rgba(212,163,115,0.2);
+}
+.welcome-section p{
+  font-family:var(--font-subtitle);
+  font-style:italic;
+  font-size:clamp(1.2rem,3vw,1.9rem);
+  color:var(--ink);max-width:780px;
+  margin:0 auto;line-height:1.55;
+}
+.welcome-section p em{font-style:italic;color:var(--caramel-dark);}
+
+/* ── FOR YOU ── */
+.for-you-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;margin-top:56px;align-items:start;
+}
+.for-you-list{list-style:none;display:flex;flex-direction:column;gap:18px;}
+.for-you-list li{
+  display:flex;align-items:flex-start;gap:14px;
+  font-family:var(--font-subtitle);font-size:1.05rem;
+  color:var(--ink);line-height:1.65;
+}
+.check{color:var(--caramel);font-size:0.75rem;flex-shrink:0;margin-top:6px;}
+.for-you-side{
+  background:var(--ink);color:var(--parchment);
+  padding:48px 44px;
+}
+.for-you-side h3{
+  font-family:var(--font-display);
+  font-size:1.6rem;font-weight:400;
+  color:var(--caramel);margin-bottom:20px;
+}
+.for-you-side p{
+  font-family:var(--font-subtitle);
+  font-size:1rem;line-height:1.85;
+  color:rgba(254,250,224,0.8);
+}
+
+/* ── AYAH BANNER ── */
+.ayah-section{
+  background:var(--caramel);
+  padding:72px 48px;text-align:center;
+}
+.ayah-section blockquote{
+  font-family:var(--font-display);
+  font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);
+  font-weight:400;color:var(--ink);
+  max-width:720px;margin:0 auto;line-height:1.45;
+}
+.ayah-ref{
+  display:block;margin-top:18px;
+  font-family:var(--font-body);
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(42,32,24,0.6);
+}
+
+/* ── PRODUCT CARDS ── */
+.cards-section{background:var(--sand);}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-top:52px;
+  border:2px solid rgba(212,163,115,0.2);
+}
+.card{
+  background:var(--parchment);
+  padding:40px 32px 44px;
+  display:flex;flex-direction:column;gap:16px;
+  text-decoration:none;color:var(--ink);
+  transition:background 0.25s,transform 0.2s;
+  position:relative;overflow:hidden;
+  border-right:1px solid rgba(212,163,115,0.2);
+}
+.card:last-child{border-right:none;}
+.card::before{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:var(--caramel);
+  transform:scaleX(0);transition:transform 0.3s ease;
+}
+.card:hover{background:var(--white);}
+.card:hover::before{transform:scaleX(1);}
+.card-num{
+  font-family:var(--font-display);
+  font-style:italic;font-size:3rem;
+  color:rgba(212,163,115,0.2);line-height:1;
+}
+.card-label{
+  font-family:var(--font-body);
+  font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--caramel-dark);
+}
+.card-title{
+  font-family:var(--font-display);
+  font-size:1.3rem;font-weight:400;
+  color:var(--ink);line-height:1.3;
+}
+.card-desc{
+  font-family:var(--font-subtitle);
+  font-size:0.95rem;color:var(--mid);
+  line-height:1.75;flex:1;
+}
+.card-arrow{
+  font-family:var(--font-body);
+  font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--caramel-dark);
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:8px;transition:gap 0.2s;
+}
+.card:hover .card-arrow{gap:12px;}
+
+/* ── ABOUT TEASER ── */
+.about-section{background:var(--parchment);}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;margin-top:20px;
+}
+.about-img-box{
+  background:var(--sand);
+  border:1px solid rgba(212,163,115,0.3);
+  aspect-ratio:4/5;
+  display:flex;align-items:center;
+  justify-content:center;flex-direction:column;
+  gap:14px;color:var(--mid);
+  position:relative;overflow:hidden;
+}
+.about-img-box::before{
+  content:'';position:absolute;
+  top:16px;right:16px;bottom:16px;left:16px;
+  border:1px solid rgba(212,163,115,0.2);
+  pointer-events:none;
+}
+.about-ph{font-size:3.5rem;opacity:0.3;}
+.about-ph-text{
+  font-family:var(--font-body);
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  opacity:0.45;
+}
+.about-content .greeting{
+  font-family:var(--font-script);
+  font-size:2.4rem;color:var(--caramel-dark);
+  margin-bottom:20px;display:block;
+}
+.about-content p{
+  font-family:var(--font-subtitle);
+  font-size:1.05rem;color:var(--ink);
+  margin-bottom:20px;line-height:1.85;
+}
+.about-rule{
+  width:50px;height:2px;
+  background:var(--caramel);
+  margin-bottom:28px;
+}
+
+/* ── EMAIL SECTION ── */
+.email-section{
+  background:var(--ink);
+  padding:100px 48px;text-align:center;
+}
+.email-section .section-label{color:var(--caramel);}
+.email-section h2{
+  font-family:var(--font-display);
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:400;color:var(--parchment);
+  margin:12px 0 16px;
+}
+.email-section p{
+  font-family:var(--font-subtitle);
+  font-style:italic;font-size:1rem;
+  color:rgba(254,250,224,0.55);
+  max-width:460px;margin:0 auto 44px;
+}
+
+/* Mailchimp overrides */
+#mc_embed_signup{background:transparent!important;width:100%!important;max-width:500px;margin:0 auto;font-family:var(--font-body)!important;}
+#mc_embed_signup h2{display:none!important;}
+#mc_embed_signup .indicates-required{display:none!important;}
+#mc_embed_signup .mc-field-group{padding-bottom:14px!important;width:100%!important;}
+#mc_embed_signup .mc-field-group label{
+  font-family:var(--font-body)!important;font-size:0.62rem!important;
+  letter-spacing:0.2em!important;text-transform:uppercase!important;
+  color:var(--caramel)!important;margin-bottom:8px!important;display:block;
+}
+#mc_embed_signup .mc-field-group input{
+  width:100%!important;padding:15px 20px!important;
+  background:rgba(254,250,224,0.06)!important;
+  border:1px solid rgba(212,163,115,0.35)!important;
+  color:var(--parchment)!important;
+  font-family:var(--font-subtitle)!important;font-size:1rem!important;
+  border-radius:0!important;box-sizing:border-box!important;
+}
+#mc_embed_signup .mc-field-group input::placeholder{color:rgba(212,163,115,0.35)!important;}
+#mc_embed_signup .mc-field-group input:focus{outline:none!important;border-color:var(--caramel)!important;}
+#mc_embed_signup #mc-embedded-subscribe{
+  background:var(--caramel)!important;color:var(--ink)!important;
+  font-family:var(--font-body)!important;font-size:0.72rem!important;
+  letter-spacing:0.2em!important;text-transform:uppercase!important;
+  padding:17px 40px!important;border:none!important;border-radius:0!important;
+  cursor:pointer!important;width:100%!important;margin-top:10px!important;
+  transition:background 0.2s!important;
+}
+#mc_embed_signup #mc-embedded-subscribe:hover{background:var(--caramel-light)!important;}
+#mc_embed_signup .refferal_badge{display:none!important;}
+#mc_embed_signup #mce-success-response{color:var(--sage)!important;font-style:italic;padding:12px 0!important;}
+#mc_embed_signup #mce-error-response{color:#e8a0a0!important;font-size:0.9rem;padding:12px 0!important;}
+#mc_embed_signup .foot{flex-direction:column!important;}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  border-top:1px solid rgba(212,163,115,0.15);
+  padding:64px 48px 32px;
+}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:56px;padding-bottom:52px;
+  border-bottom:1px solid rgba(212,163,115,0.12);
+}
+.footer-brand{
+  font-family:var(--font-script);
+  font-size:2rem;color:var(--caramel);
+  margin-bottom:14px;display:block;
+}
+.footer-tagline{
+  font-family:var(--font-subtitle);
+  font-style:italic;font-size:0.95rem;
+  color:rgba(254,250,224,0.45);
+  max-width:240px;line-height:1.75;
+}
+.footer-col h4{
+  font-family:var(--font-body);
+  font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--caramel);margin-bottom:20px;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.footer-col ul a{
+  font-family:var(--font-subtitle);
+  font-size:0.95rem;color:rgba(254,250,224,0.5);
+  text-decoration:none;transition:color 0.2s;
+}
+.footer-col ul a:hover{color:var(--caramel);}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:28px;flex-wrap:wrap;gap:16px;
+}
+.footer-copy{
+  font-family:var(--font-body);
+  font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(254,250,224,0.25);
+}
+.footer-socials{display:flex;gap:22px;}
+.footer-socials a{
+  font-family:var(--font-body);
+  font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(254,250,224,0.4);text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-socials a:hover{color:var(--caramel);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .section{padding:80px 24px;}
+  .for-you-grid,.about-grid{grid-template-columns:1fr;}
+  .cards-grid{grid-template-columns:1fr;}
+  .card{border-right:none;border-bottom:1px solid rgba(212,163,115,0.2);}
+  .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
+  .hero{padding:100px 20px 60px;}
+  .welcome-section,.ayah-section{padding:60px 24px;}
+  .email-section{padding:72px 24px;}
+  footer{padding:48px 24px 28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="2.svg" alt="With Love Nabila" class="logo-svg" onerror="this.style.display='none'"/>
+    <span class="nav-brand-text">With Love, Nabila</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-link active">Home</a></li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+    <li><a href="shop.html" class="nav-link">The Shop</a></li>
+    <li><a href="https://nabilasirajo.substack.com" target="_blank" class="nav-link">Blog</a></li>
+    <li><a href="connect.html" class="nav-link">Connect</a></li>
+    <li><a href="shop.html" class="nav-cta">Shop Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-logo-wrap">
+    <img src="2.svg" alt="With Love Nabila Logo" class="hero-logo-img" onerror="this.style.display='none'"/>
+  </div>
+  <div class="hero-eyebrow">healing · tawakkul · imaan</div>
+  <h1 class="hero-title">
+    A space for the <em>Muslimah</em><br/>finding her way back.
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Letters from healing — written first to myself, and now, with love, to you.</p>
+  <div class="hero-ctas">
+    <a href="https://nabilasirajo.substack.com" target="_blank" class="btn-gold">→ Read the Blog</a>
+    <a href="shop.html" class="btn-ghost">Explore the Shop</a>
+  </div>
+  <div class="hero-scroll">↓ &nbsp; scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>healing</span><span class="sep">✦</span>
+    <span>tawakkul</span><span class="sep">✦</span>
+    <span>imaan</span><span class="sep">✦</span>
+    <span>dua</span><span class="sep">✦</span>
+    <span>with love, nabila</span><span class="sep">✦</span>
+    <span>you are seen by Allah</span><span class="sep">✦</span>
+    <span>reset · realign · rebrand · rebuild</span><span class="sep">✦</span>
+    <span>healing</span><span class="sep">✦</span>
+    <span>tawakkul</span><span class="sep">✦</span>
+    <span>imaan</span><span class="sep">✦</span>
+    <span>dua</span><span class="sep">✦</span>
+    <span>with love, nabila</span><span class="sep">✦</span>
+    <span>you are seen by Allah</span><span class="sep">✦</span>
+    <span>reset · realign · rebrand · rebuild</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- WELCOME -->
+<section class="welcome-section">
+  <p>Welcome to the place where <em>healing happens with Allah at the center</em> — because real change, real peace, and real becoming can only come from Him.</p>
+</section>
+
+<!-- FOR YOU -->
+<section class="section" style="background:var(--parchment);">
+  <div class="section-inner">
+    <div class="section-label">This is for you if...</div>
+    <h2 class="section-title">You know there is <em>more.</em><br/>You are just not sure how to get there.</h2>
+    <div class="for-you-grid">
+      <ul class="for-you-list">
+        <li><span class="check">✦</span>You have been carrying a quiet heaviness — and you are ready to put it down.</li>
+        <li><span class="check">✦</span>You want to heal but you do not know where to begin.</li>
+        <li><span class="check">✦</span>You feel like everyone is okay except you — and you are exhausted pretending.</li>
+        <li><span class="check">✦</span>You want a life rooted in tawakkul, not just motivation that fades.</li>
+        <li><span class="check">✦</span>You are a Muslimah navigating life, love, and becoming — and you need a reminder that Allah is enough.</li>
+        <li><span class="check">✦</span>You want to stop drifting and start living with intention and faith.</li>
+      </ul>
+      <div class="for-you-side">
+        <h3>Here is what I know to be true.</h3>
+        <p>Healing cannot happen without Allah. People come and go. Seasons change. Life rearranges itself in ways we never planned for. But Allah is the only constant — and when you make Him the center of everything, everything else begins to fall into place.<br/><br/>I learned this not from a book, but from living it. And now I write so you remember it too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AYAH -->
+<section class="ayah-section">
+  <blockquote>
+    "And He found you lost and guided you."
+    <span class="ayah-ref">— Surah Ad-Duha · 93:7</span>
+  </blockquote>
+</section>
+
+<!-- SHOP CARDS -->
+<section class="section cards-section">
+  <div class="section-inner">
+    <div class="section-label">Resources for the journey</div>
+    <h2 class="section-title">Choose where you want to <em>begin.</em></h2>
+    <div class="cards-grid">
+      <a href="https://nabilasirajo.substack.com" target="_blank" class="card">
+        <div class="card-num">01</div>
+        <div class="card-label">Weekly Letters</div>
+        <div class="card-title">The Blog & Newsletter</div>
+        <div class="card-desc">Letters from healing — written from the heart, rooted in faith. Published on Substack every week.</div>
+        <span class="card-arrow">Read on Substack →</span>
+      </a>
+      <a href="https://selar.com/3n2k36639x" target="_blank" class="card">
+        <div class="card-num">02</div>
+        <div class="card-label">The Ebook — Available Now</div>
+        <div class="card-title">Dua and Tawakkul</div>
+        <div class="card-desc">A faith-rooted guide to falling in love with dua and trusting Allah completely — with every single thing.</div>
+        <span class="card-arrow">Buy on Selar →</span>
+      </a>
+      <a href="shop.html" class="card">
+        <div class="card-num">03</div>
+        <div class="card-label">Journals — Coming Soon</div>
+        <div class="card-title">Healing Journals</div>
+        <div class="card-desc">The Life Audit Journal and The Quiet Mind Healing Journal — two deeply personal tools for the Muslimah rebuilding.</div>
+        <span class="card-arrow">View the Shop →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT TEASER -->
+<section class="section about-section" id="about-teaser">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-box">
+        <div class="about-ph">🌿</div>
+        <div class="about-ph-text">Add your photo here</div>
+      </div>
+      <div class="about-content">
+        <span class="greeting">Hi, I'm Nabila.</span>
+        <div class="about-rule"></div>
+        <p>Before <em>With Love, Nabila</em> had a name — before a single word was published — I found something that changed everything: the peace of making Allah the absolute center of my life.</p>
+        <p>I started writing letters. Not for an audience, but for myself — from healing, through the hard seasons and the quiet ones. Then I realized: the whole world is healing. Someone may need to read this.</p>
+        <p>So I started publishing. And now I want to go bigger — because this message is too important to stay small.</p>
+        <a href="about.html" class="btn-gold" style="margin-top:8px;">→ Read My Full Story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="email-section" id="newsletter">
+  <div class="section-label">Stay connected</div>
+  <h2>Get letters from healing<br/>delivered to your inbox.</h2>
+  <p>Every Thursday — a letter written just for you. Faith, healing, and tawakkul. Free, always.</p>
+
+  <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <div id="mc_embed_signup">
+    <form action="https://gmail.us9.list-manage.com/subscribe/post?u=be8199004a3a3df9db5c60210&amp;id=a807e9c6dc&amp;f_id=004affe3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+      <div id="mc_embed_signup_scroll">
+        <div class="mc-field-group">
+          <label for="mce-EMAIL">Email Address</label>
+          <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="your@email.com">
+        </div>
+        <div class="mc-field-group">
+          <label for="mce-FNAME">First Name</label>
+          <input type="text" name="FNAME" class="text" id="mce-FNAME" placeholder="Your name">
+        </div>
+        <div id="mce-responses" class="clear foot">
+          <div class="response" id="mce-error-response" style="display:none;"></div>
+          <div class="response" id="mce-success-response" style="display:none;"></div>
+        </div>
+        <div aria-hidden="true" style="position:absolute;left:-5000px;">
+          <input type="text" name="b_be8199004a3a3df9db5c60210_a807e9c6dc" tabindex="-1" value="">
+        </div>
+        <div class="optionalParent">
+          <div class="clear foot">
+            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="→ Join the Community">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+  <script type="text/javascript">(function($){window.fnames=new Array();window.ftypes=new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';}(jQuery));var $mcj=jQuery.noConflict(true);</script>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="footer-brand">With Love, Nabila</span>
+        <p class="footer-tagline">Healing · tawakkul · imaan. Letters for the Muslimah finding her way back to Allah.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="shop.html">The Shop</a></li>
+          <li><a href="https://nabilasirajo.substack.com" target="_blank">Blog</a></li>
+          <li><a href="connect.html">Connect</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="https://selar.com/3n2k36639x" target="_blank">Dua & Tawakkul Ebook</a></li>
+          <li><a href="shop.html">Life Audit Journal</a></li>
+          <li><a href="shop.html">Quiet Mind Journal</a></li>
+          <li><a href="shop.html#affiliates">Become an Affiliate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://instagram.com/withlove.nabilas" target="_blank">Instagram</a></li>
+          <li><a href="https://tiktok.com/@withlovenabila" target="_blank">TikTok</a></li>
+          <li><a href="https://pinterest.com/withlovenabila" target="_blank">Pinterest</a></li>
+          <li><a href="https://nabilasirajo.substack.com" target="_blank">Substack</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 With Love, Nabila · All rights reserved · Built with tawakkul</div>
+      <div class="footer-socials">
+        <a href="https://instagram.com/withlove.nabilas" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@withlovenabila" target="_blank">TikTok</a>
+        <a href="https://pinterest.com/withlovenabila" target="_blank">Pinterest</a>
+        <a href="https://nabilasirajo.substack.com" target="_blank">Substack</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+</script>
+</body>
+</html>
